@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>La race comme signe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;0,900;1,700&family=Lexend:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* Direction : une affiche de recherche pop, dans l'esprit de la référence. Fond crème, encre vert très foncé,
+   la palette verte d'Emma pour les aplats, un seul rouge réservé au sens « danger ». Playfair Display pour les titres,
+   Lexend pour le texte. Grands titres, blocs arrondis, pastilles, taches de couleur en CSS. Thème clair unique. */
+:root {
+  --cream: #faf8ea;
+  --card: #fffef7;
+  --ink: #1c2608;
+  --muted: #56603e;
+  --line: #e2e4c6;
+  --green: #72a603;
+  --green-2: #8cb529;
+  --lime: #b2e92b;
+  --lime-2: #b6f254;
+  --pale: #d9f27e;
+  --green-text: #4a6b02;
+  --neutral-bar: #c4c9a4;
+  --danger: #c93c25;
+  --danger-soft: #f7ded6;
+  --font-display: "Playfair Display", Georgia, "Times New Roman", serif;
+  --font-body: "Lexend", "Helvetica Neue", Arial, sans-serif;
+  --radius: 22px;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
+body { margin: 0; background: var(--cream); color: var(--ink); font: 300 17px/1.65 var(--font-body); overflow-x: hidden; }
+b, strong { font-weight: 600; }
+a { color: var(--green-text); }
+:focus-visible { outline: 3px solid var(--green); outline-offset: 2px; }
+.wrap { max-width: 1040px; margin: 0 auto; padding: 0 20px; position: relative; }
+.read { max-width: 640px; }
+h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; }
+h1 { font-weight: 900; font-size: clamp(46px, 8.4vw, 96px); line-height: .95; letter-spacing: -.01em; }
+h1 em { font-style: italic; font-weight: 700; color: var(--green); display: block; }
+h2 { font-weight: 800; font-size: clamp(30px, 4.6vw, 44px); line-height: 1.05; }
+h3 { font-weight: 700; font-size: 21px; line-height: 1.2; }
+p { margin: 0; }
+ul { margin: 0; padding-left: 20px; }
+li + li { margin-top: 6px; }
+.tag { font: 600 12px/1.2 var(--font-body); letter-spacing: .12em; text-transform: uppercase; color: var(--green-text); }
+.stack > * + * { margin-top: 18px; }
+
+/* Ouverture */
+header.hero { padding: 64px 0 56px; position: relative; overflow: hidden; }
+header.hero::before { content: ""; position: absolute; right: -120px; top: -80px; width: 520px; height: 520px; border-radius: 58% 42% 46% 54% / 52% 48% 52% 48%; background: var(--lime); z-index: 0; }
+header.hero .wrap { z-index: 1; }
+.hero h1 { max-width: 760px; }
+.hero h1 > span { display: block; }
+.hero .read { font-size: 19px; font-weight: 300; }
+.hero .meta { display: flex; flex-wrap: wrap; gap: 8px 24px; color: var(--muted); font-size: 15px; font-weight: 400; }
+.badge { position: absolute; right: 64px; top: 28px; width: 150px; height: 150px; border-radius: 50%; background: var(--card); display: grid; place-items: center; text-align: center; padding: 18px; font: 600 12px/1.35 var(--font-body); letter-spacing: .08em; text-transform: uppercase; color: var(--ink); box-shadow: 0 0 0 10px color-mix(in srgb, var(--card) 45%, transparent); }
+@media (max-width: 860px) { .badge { display: none; } header.hero::before { width: 340px; height: 340px; right: -160px; top: -120px; } header.hero::after { display: none; } }
+.steps { display: flex; flex-wrap: wrap; gap: 8px; padding: 0; list-style: none; }
+.steps li + li { margin-top: 0; }
+.steps a { display: inline-flex; align-items: center; gap: 8px; text-decoration: none; color: var(--ink); background: var(--card); border: 1.5px solid var(--ink); border-radius: 999px; padding: 7px 16px; font-size: 14px; font-weight: 400; transition: background .15s; }
+.steps a:hover { background: var(--lime); }
+.steps span { font-weight: 600; color: var(--green-text); }
+
+section { padding: 64px 0; }
+.sec-head { display: grid; gap: 10px; margin-bottom: 28px; }
+
+/* Panneaux */
+.panel { background: var(--card); border-radius: var(--radius); padding: 22px; box-shadow: 0 1px 0 var(--line); }
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+@media (max-width: 760px) { .two { grid-template-columns: 1fr; } }
+.panel ul { margin-top: 12px; }
+.panel li + li { margin-top: 12px; }
+.src { display: inline-block; font: 400 12px/1.4 var(--font-body); color: var(--muted); background: color-mix(in srgb, var(--pale) 55%, transparent); border-radius: 999px; padding: 2px 9px; margin-top: 4px; }
+
+/* 01 Test : bande verte */
+#test .band { background: var(--green); border-radius: 32px; padding: 34px 28px 30px; }
+#test .band .tag { color: var(--ink); }
+#test .band h2 { color: var(--ink); }
+#test .band .read { color: var(--ink); font-weight: 400; }
+.dogs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+@media (max-width: 760px) { .dogs { grid-template-columns: repeat(2, 1fr); } }
+.dog { background: var(--card); border: 0; border-radius: 20px; padding: 10px 10px 12px; display: flex; flex-direction: column; gap: 10px; text-align: left; font: inherit; color: inherit; cursor: pointer; transition: transform .15s, box-shadow .15s; }
+.dog:hover { transform: translateY(-3px); }
+.dog[aria-pressed="true"] { box-shadow: 0 0 0 4px var(--ink); }
+img.photo { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 14px; background: var(--pale); }
+.dog .letter { font: 700 15px var(--font-display); color: var(--ink); padding-left: 4px; }
+.reveal { display: none; margin-top: 20px; }
+.reveal.on { display: block; }
+.reveal-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+@media (max-width: 760px) { .reveal-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 460px) { .reveal-grid, .dogs { grid-template-columns: 1fr; } }
+.verdict { background: var(--card); border-radius: 18px; padding: 14px; font-size: 14px; display: grid; gap: 10px; align-content: start; }
+.verdict h3 { font-size: 18px; }
+.law { border-left: 4px solid var(--danger); padding-left: 10px; }
+.sci { border-left: 4px solid var(--green); padding-left: 10px; }
+.law .tag { color: var(--danger); }
+.sci .tag { color: var(--green-text); }
+.chosen-note { margin-top: 16px; font-size: 15px; color: var(--ink); font-weight: 400; }
+.lesson { margin-top: 12px; background: var(--pale); border-radius: 16px; padding: 14px 16px; }
+
+/* 03 Peirce */
+.peirce { display: grid; grid-template-columns: 300px 1fr; gap: 24px; align-items: start; }
+@media (max-width: 760px) { .peirce { grid-template-columns: 1fr; } }
+.peirce img.photo { aspect-ratio: 3 / 2; }
+.tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
+.tabs button { font: 600 13px var(--font-body); letter-spacing: .08em; text-transform: uppercase; border: 1.5px solid var(--ink); background: var(--card); color: var(--ink); border-radius: 999px; padding: 8px 16px; cursor: pointer; }
+.tabs button[aria-selected="true"] { background: var(--lime); }
+.tabpanel { margin-top: 14px; }
+
+/* Boucle */
+.loop { background: var(--card); border-radius: var(--radius); padding: 14px; overflow-x: auto; }
+.loop svg { display: block; width: 100%; min-width: 560px; height: auto; }
+.node { cursor: pointer; }
+.node rect { fill: var(--cream); stroke: var(--line); stroke-width: 1.5; rx: 16; transition: fill .15s, stroke .15s; }
+.node:hover rect, .node:focus rect { stroke: var(--ink); }
+.node.active rect { fill: var(--lime); stroke: var(--ink); stroke-width: 2; }
+.node text { fill: var(--ink); font-family: var(--font-body); }
+.node .sub { fill: var(--muted); font-size: 12px; }
+.node.active .sub { fill: var(--ink); }
+.edge { stroke: var(--green-2); stroke-width: 1.6; fill: none; }
+.edge-label { fill: var(--muted); font: 12px var(--font-body); }
+.loop-detail { margin-top: 14px; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+@media (max-width: 760px) { .loop-detail { grid-template-columns: 1fr; } }
+
+/* 04 Hainaut */
+.kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+@media (max-width: 760px) { .kpis { grid-template-columns: 1fr 1fr; } }
+.kpi { border-radius: 20px; padding: 18px; background: var(--pale); }
+.kpi b { display: block; font: 900 44px/1 var(--font-display); font-variant-numeric: tabular-nums; margin-bottom: 8px; }
+.kpi span { font-size: 14px; font-weight: 400; }
+.kpi.alert { background: var(--danger-soft); }
+.kpi.alert b { color: var(--danger); }
+.kpi.dark { background: var(--ink); color: var(--cream); }
+.kpi.dark b { color: var(--lime-2); }
+.bars { display: grid; gap: 9px; margin-top: 12px; }
+.bars .bar + .bar { margin-top: 0; }
+.bar { display: grid; grid-template-columns: 230px 1fr 34px; gap: 12px; align-items: center; font-size: 14px; font-weight: 400; }
+@media (max-width: 560px) { .bar { grid-template-columns: 130px 1fr 28px; font-size: 13px; } }
+.bar .track { height: 14px; background: color-mix(in srgb, var(--line) 70%, transparent); border-radius: 999px; overflow: hidden; }
+.bar .fill { height: 100%; background: var(--neutral-bar); border-radius: 999px; }
+.bar.hot .fill { background: var(--danger); }
+.bar.be .fill { background: var(--green); }
+.bar .v { font-variant-numeric: tabular-nums; text-align: right; color: var(--muted); }
+.legend { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 14px; font-size: 13px; color: var(--muted); }
+.legend span::before { content: ""; display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; vertical-align: 0; }
+.legend .l-hot::before { background: var(--danger); }
+.legend .l-be::before { background: var(--green); }
+.legend .l-other::before { background: var(--neutral-bar); }
+.filters { display: flex; flex-wrap: wrap; gap: 8px; margin: 24px 0 10px; }
+.filters button { font: 400 14px var(--font-body); border: 1.5px solid var(--ink); background: var(--card); color: var(--ink); border-radius: 999px; padding: 7px 14px; cursor: pointer; }
+.filters button[aria-pressed="true"] { background: var(--ink); color: var(--lime-2); }
+.regs { display: grid; gap: 8px; max-height: 460px; overflow-y: auto; padding-right: 4px; }
+.reg { background: var(--card); border-left: 5px solid var(--neutral-bar); border-radius: 14px; padding: 12px 14px; display: grid; grid-template-columns: 1fr auto; gap: 2px 12px; font-size: 14px; font-weight: 400; }
+.reg[data-k="race"], .reg[data-k="categories"], .reg[data-k="maximaliste"] { border-left-color: var(--danger); }
+.reg[data-k="interdiction"] { border-left-color: var(--ink); }
+.reg[data-k="comportement"] { border-left-color: var(--green); }
+.reg .k { font-size: 12px; color: var(--muted); text-align: right; }
+.reg .c, .reg .p { grid-column: 1 / -1; color: var(--muted); font-weight: 300; }
+.count { font-size: 14px; color: var(--muted); }
+.callouts { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 22px; }
+@media (max-width: 760px) { .callouts { grid-template-columns: 1fr; } }
+
+/* 05 Démarche */
+.question { font: 700 clamp(22px, 3.2vw, 30px)/1.3 var(--font-display); padding: 26px 28px; background: var(--lime); border-radius: var(--radius); }
+.subq { margin: 18px 0 28px; background: var(--card); border-radius: var(--radius); padding: 18px 22px; }
+.subq ul { margin-top: 8px; }
+.method { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+@media (max-width: 760px) { .method { grid-template-columns: 1fr; } }
+.method h3 { margin: 4px 0 6px; }
+.compare { display: grid; grid-template-columns: 1fr auto 1fr; gap: 10px; align-items: center; margin-top: 14px; font-size: 14px; font-weight: 400; }
+.compare .box { border-radius: 14px; padding: 12px; background: var(--danger-soft); }
+.compare .box + .vs + .box { background: var(--pale); }
+.compare .vs { font: 700 italic 18px var(--font-display); color: var(--muted); }
+
+/* 06 Fiche */
+details { background: var(--card); border-radius: 18px; transition: background .15s; }
+details + details { margin-top: 10px; }
+details[open] { background: color-mix(in srgb, var(--pale) 45%, var(--card)); }
+summary { list-style: none; cursor: pointer; padding: 16px 18px; display: grid; grid-template-columns: 40px 1fr auto; gap: 10px; align-items: center; }
+summary::-webkit-details-marker { display: none; }
+summary::after { content: "+"; font: 400 24px/1 var(--font-body); color: var(--green-text); }
+details[open] summary::after { content: "–"; }
+summary .num { display: grid; place-items: center; width: 32px; height: 32px; border-radius: 50%; background: var(--lime); font: 700 15px var(--font-display); }
+summary .title { font-weight: 500; }
+details .body { padding: 0 18px 18px 68px; font-size: 15px; display: grid; gap: 10px; }
+@media (max-width: 560px) { details .body { padding-left: 18px; } }
+
+/* 07 Fin */
+#contact { padding-bottom: 40px; }
+.cta { background: var(--ink); color: var(--cream); border-radius: 32px; padding: 40px 34px; display: grid; gap: 16px; position: relative; overflow: hidden; }
+.cta::after { content: ""; position: absolute; right: -70px; bottom: -90px; width: 260px; height: 260px; border-radius: 50%; background: var(--green); opacity: .9; }
+.cta > * { position: relative; z-index: 1; max-width: 700px; }
+.cta .tag { color: var(--lime-2); }
+.cta h2 { color: var(--lime-2); }
+.cta p { font-weight: 300; }
+.cta .row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+.cta button { font: 600 15px var(--font-body); border: 0; border-radius: 999px; padding: 11px 20px; background: var(--lime); color: var(--ink); cursor: pointer; }
+.cta .mail { font-size: 16px; font-weight: 400; }
+footer { padding: 24px 0 64px; font-size: 14px; color: var(--muted); }
+footer ol { padding-left: 20px; margin-top: 10px; }
+footer li + li { margin-top: 6px; }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap stack">
+    <div class="badge" aria-hidden="true">Sémiotique · Médias · Marketing</div>
+    <p class="tag">Proposition de sujet de mémoire · Master en communication, ULB · 2026-2027</p>
+    <h1><span>Les races de chiens</span><em>comme signes</em></h1>
+    <p class="read"><span>Mon mémoire étudie l'influence des médias, de par les signes qu'ils utilisent, sur le parcours vécu par les races canines en Belgique</span></p>
+    <div class="meta">
+      <span>Emma De Volder</span>
+      <span>Finalité communication corporate et marketing</span>
+    </div>
+    <ol class="steps" aria-label="Sommaire">
+      <li><a href="#test"><span>01</span>Le test</a></li>
+      <li><a href="#probleme"><span>02</span>Le problème</a></li>
+      <li><a href="#signe"><span>03</span>La race comme signe</a></li>
+      <li><a href="#hainaut"><span>04</span>Le terrain</a></li>
+      <li><a href="#demarche"><span>05</span>Question et démarche</a></li>
+      <li><a href="#fiche"><span>06</span>La fiche</a></li>
+      <li><a href="#contact"><span>07</span>Pourquoi vous</a></li>
+    </ol>
+  </div>
+</header>
+
+<main>
+
+<section id="test">
+  <div class="wrap"><div class="band">
+    <div class="sec-head">
+      <p class="tag">01 · Avant de lire</p>
+      <h2>Lequel de ces chiens vous semble le plus dangereux ?</h2>
+      <p class="read">Cliquez sur un chien. Votre choix reste visible, puis la loi et la science répondent.</p>
+    </div>
+    <div class="dogs" role="group" aria-label="Choisir un chien">
+      <button class="dog" type="button" data-dog="a" aria-pressed="false">
+        <img class="photo" src="malinois.jpg" alt="Malinois en harnais militaire">
+        <span class="letter">A</span>
+      </button>
+      <button class="dog" type="button" data-dog="b" aria-pressed="false">
+        <img class="photo" src="ptb.jpg" alt="Pit Bull Terrier">
+        <span class="letter">B</span>
+      </button>
+      <button class="dog" type="button" data-dog="c" aria-pressed="false">
+        <img class="photo" src="lab.jpg" alt="Labrador">
+        <span class="letter">C</span>
+      </button>
+      <button class="dog" type="button" data-dog="d" aria-pressed="false">
+        <img class="photo" src="chichi.jpg" alt="Chihuahua">
+        <span class="letter">D</span>
+      </button>
+    </div>
+
+    <div class="reveal" id="reveal" aria-live="polite">
+      <div class="reveal-grid">
+        <div class="verdict">
+          <h3>A · Berger malinois</h3>
+          <div class="law"><p class="tag">La loi</p><p>Listé « dangereux » dans 6 règlements du Hainaut.</p></div>
+          <div class="sci"><p class="tag">L'institution</p><p>Race de travail de la police et de l'armée.</p></div>
+        </div>
+        <div class="verdict">
+          <h3>B · Pit Bull Terrier</h3>
+          <div class="law"><p class="tag">La loi</p><p>Présent dans les 21 règlements à liste de races.</p></div>
+          <div class="sci"><p class="tag">La science</p><p>Scores d'agressivité envers les inconnus peu supérieurs à la moyenne, loin de sa réputation.</p><p class="src">Duffy et al. 2008</p></div>
+        </div>
+        <div class="verdict">
+          <h3>C · Labrador</h3>
+          <div class="law"><p class="tag">La loi</p><p>Cité dans aucun règlement.</p></div>
+          <div class="sci"><p class="tag">La science</p><p>Parmi les trois races les plus impliquées dans les morsures soignées à l'hôpital en France, parce qu'il est très répandu.</p><p class="src">Chaire BEA 2023</p></div>
+        </div>
+        <div class="verdict">
+          <h3>D · Chihuahua</h3>
+          <div class="law"><p class="tag">La loi</p><p>Cité dans aucun règlement.</p></div>
+          <div class="sci"><p class="tag">La science</p><p>Parmi les scores les plus élevés d'agressivité envers les inconnus.</p><p class="src">Duffy et al. 2008</p></div>
+        </div>
+      </div>
+      <p class="chosen-note" id="chosen-note"></p>
+      <p class="lesson"><b>En résumé : </b> Une race de chien, c'est bien plus que ce que l'on voit, ou ce que l'on pense savoir, au travers des médias.</p>
+    </div>
+  </div></div>
+</section>
+
+<section id="probleme">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="tag">02 · Le problème</p>
+      <h2>La race prédit mal le comportement, mais elle organise nos décisions</h2>
+    </div>
+    <div class="two">
+      <div class="panel">
+        <p class="tag">Ce que l'on sait</p>
+        <ul>
+          <li>La variation est plus forte à l'intérieur d'une race qu'entre les races. <span class="src">Duffy et al. 2008 ; Hammond et al. 2022</span></li>
+          <li>Les lois visant des races n'ont pas fait baisser les morsures. <span class="src">Creedon et Ó Súilleabháin 2017 ; Mills 2022</span></li>
+          <li>La presse cite la race dans ses récits de morsure et privilégie les races déjà stigmatisées. <span class="src">Mouton et al. 2019 ; Montrose et al. 2020</span></li>
+          <li>Les films font monter les achats d'une race pendant plusieurs années. <span class="src">Ghirlanda et al. 2014 ; Weir et Kessler 2022</span></li>
+          <li>L'étiquette « pitbull » allonge le séjour en refuge. <span class="src">Nardulli 2018</span></li>
+        </ul>
+      </div>
+      <div class="panel">
+        <p class="tag">Ce que l'on ne sait pas</p>
+        <div style="margin-top:12px"> 
+          <ul>
+          <li>Comment ces significations se construisent-elles en Belgique ?</li>
+          <li>Dans quel cadre ces influences s'appliquent-elles ?</li>
+          <li>Ces signes, qui risquent de devenir des conventions, que changent-ils pour différentes races ?</li>
+          <li>Toutes ces stigmatisations dans les médias influencent-elles le parcours des chiens en refuge ?</li>
+        </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="signe">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="tag">03 · Le cadre</p>
+      <h2>La race comme signe</h2>
+      <p class="read">Dans le cadre de ma recherche, les outils sémiotiques que donnent Peirce ou Barthes sont importants. Ici, un chien, du moins sa race, serait mis en avant systématiquement sous un angle ou un autre ; comprendre en quoi ces angles et les mots utilisés impactent l'impression donnée est un atout de taille.</p>
+    </div>
+
+    <div class="panel">
+      <div class="peirce">
+        <img class="photo" src="ptb-m.webp" alt="Pit Bull Terrier muselé">
+        <div>
+          <p class="tag">Lire l'image avec Peirce</p>
+          <div class="tabs" role="tablist" aria-label="Trois lectures">
+            <button role="tab" id="t-icone" aria-selected="true" aria-controls="p-icone">Icône</button>
+            <button role="tab" id="t-indice" aria-selected="false" aria-controls="p-indice">Indice</button>
+            <button role="tab" id="t-symbole" aria-selected="false" aria-controls="p-symbole">Symbole</button>
+          </div>
+          <div class="tabpanel" role="tabpanel" id="p-icone" aria-labelledby="t-icone">
+            <ul>
+              <li>Un chien de type Staffordshire ou pitbull : tête large, joues marquées, cou épais, pelage court bleu-fauve et poitrail blanc.</li> 
+              <li>Un regard calme, des oreilles naturelles et détendues, la langue visible parce qu’il halète, un fond vert uni et neutre. Rien dans sa posture n’exprime l’agressivité.</li>
+              <li>Ici, on « reconnaît » la race uniquement à la morphologie. Or Nardulli (2018) montre que cette identification visuelle est peu fiable. La race est déjà une lecture, pas un fait.</li>
+            </ul>
+          </div>
+          <div class="tabpanel" role="tabpanel" id="p-indice" aria-labelledby="t-indice" hidden>
+            <ul>
+              <li>La muselière est centrale : elle renvoie à une règle qui s’applique à ce chien, ou laisse supposer qu’il a déjà mordu ou pourrait mordre.</li>
+              <li>La muselière ne dit pas ce que le chien a fait, elle dit seulement qu’on le traite comme dangereux. Le passant ne voit pas la différence.</li>
+            </ul>
+          </div>
+          <div class="tabpanel" role="tabpanel" id="p-symbole" aria-labelledby="t-symbole" hidden>
+            <ul>
+              <li>La combinaison « cette morphologie + une muselière » se lit comme « chien dangereux », alors que rien d’autre dans l’image ne le suggère.</li>
+              <li>Ce sens n’est ni dans le chien ni dans l’objet : il vient d'une convention, des médias et de la loi.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p class="read" style="margin:28px 0 12px">Cliquez sur une étape pour voir la théorie et les preuves qui s'y rattachent.</p>
+    <div class="loop">
+      <svg viewBox="0 0 760 330" role="img" aria-label="La chaîne du signe : médias, représentation, règlement, muselière, en boucle">
+        <defs>
+          <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="currentColor"/></marker>
+        </defs>
+        <g style="color: var(--muted)">
+          <path class="edge" d="M330 70 H430" marker-end="url(#arr)"/>
+          <path class="edge" d="M570 106 V174" marker-end="url(#arr)"/>
+          <path class="edge" d="M430 210 H330" marker-end="url(#arr)"/>
+          <path class="edge" d="M190 174 V106" marker-end="url(#arr)"/>
+          <path class="edge" d="M570 246 V280" stroke-dasharray="4 4"/>
+        </g>
+        <text class="edge-label" x="380" y="60" text-anchor="middle">répétition</text>
+        <text class="edge-label" x="580" y="144">figement</text>
+        <text class="edge-label" x="380" y="200" text-anchor="middle">application</text>
+        <text class="edge-label" x="200" y="144">nouveaux récits</text>
+        <g class="node active" data-step="0" tabindex="0" role="button" aria-label="Médias et marketing"><rect x="50" y="34" width="280" height="72" rx="8"/><text x="66" y="64" font-size="16" font-weight="600">Médias et marketing</text><text class="sub" x="66" y="86">films, pubs, faits divers</text></g>
+        <g class="node" data-step="1" tabindex="0" role="button" aria-label="Représentation publique"><rect x="430" y="34" width="280" height="72" rx="8"/><text x="446" y="64" font-size="16" font-weight="600">Représentation publique</text><text class="sub" x="446" y="86">la race devient symbole</text></g>
+        <g class="node" data-step="2" tabindex="0" role="button" aria-label="Règlement communal"><rect x="430" y="174" width="280" height="72" rx="8"/><text x="446" y="204" font-size="16" font-weight="600">Règlement communal</text><text class="sub" x="446" y="226">la convention devient loi</text></g>
+        <g class="node" data-step="3" tabindex="0" role="button" aria-label="Muselière dans la rue"><rect x="50" y="174" width="280" height="72" rx="8"/><text x="66" y="204" font-size="16" font-weight="600">Muselière dans la rue</text><text class="sub" x="66" y="226">un indice visible</text></g>
+        <text x="570" y="306" text-anchor="middle" class="edge-label">la science : absente de 27 textes sur 29</text>
+      </svg>
+    </div>
+    <div class="loop-detail" id="loop-detail" aria-live="polite"></div>
+  </div>
+</section>
+
+<section id="hainaut">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="tag">04 · Un terrain déjà ouvert</p>
+      <h2>Dans le Hainaut, le symbole est devenu règlement</h2>
+      <p class="read">J'ai relevé les règles sur les chiens « dangereux » des 69 communes de la province. Elles tiennent en 29 textes, communaux ou de zone de police.</p>
+    </div>
+    <div class="kpis">
+      <div class="kpi"><b>29</b><span>textes pour 69 communes</span></div>
+      <div class="kpi alert"><b>72 %</b><span>définissent le danger par une liste de races</span></div>
+      <div class="kpi alert"><b>93 %</b><span>ne justifient pas leur liste</span></div>
+      <div class="kpi dark"><b>1998</b><span>année de la liste de 13 races encore recopiée</span></div>
+    </div>
+
+    <div class="panel" style="margin-top:16px">
+      <p class="tag">Races citées, sur les 21 textes à liste</p>
+      <div class="bars" id="bars"></div>
+      <div class="legend"><span class="l-hot">Présentes dans tous les textes</span><span class="l-be">Races belges</span><span class="l-other">Autres races</span></div>
+    </div>
+
+    <div class="filters" role="group" aria-label="Filtrer les textes">
+      <button type="button" data-f="all" aria-pressed="true">Tous</button>
+      <button type="button" data-f="liste" aria-pressed="false">Liste de races</button>
+      <button type="button" data-f="interdiction" aria-pressed="false">Quasi-interdiction</button>
+      <button type="button" data-f="comportement" aria-pressed="false">Comportement seul</button>
+    </div>
+    <p class="count" id="count"></p>
+    <div class="regs" id="regs"></div>
+
+    <div class="callouts">
+      <div class="panel">
+        <p class="tag">Une liste sans base légale</p>
+        <p style="margin-top:8px">La liste de 13 races provient d'un arrêté ministériel du 21 octobre 1998, annulé par le Conseil d'État pour vice de procédure. Elle reste recopiée dans la moitié des textes.</p>
+        <p class="src" style="margin-top:8px">UVCW, art. 1625</p>
+      </div>
+      <div class="panel">
+        <p class="tag">Un contre-exemple</p>
+        <p style="margin-top:8px">Charleroi a supprimé sa liste en 2022 : « aucun fondement légal », selon l'échevine du Bien-être animal.</p>
+        <p class="src" style="margin-top:8px">Télésambre, 1er juillet 2022</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="demarche">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="tag">05 · Question et démarche</p>
+      <h2>Ce que je veux comprendre, et comment</h2>
+    </div>
+    <p class="question"><span>Comment les médias et la communication marketing, par les significations qu'ils attribuent aux races canines, orientent-ils le parcours des chiens selon leur race en Belgique ?</span></p>
+    <div class="subq">
+      <p class="tag">Sous-questions</p>
+      <ul>
+        <li>Quelles sont les races stigmatisées ou valorisées, et comment le sont-elles ?</li>
+        <li>Comment ces signes atteignent-ils nos lois ?</li>
+        <li>Cela laisse-t-il des traces en refuge ?</li>
+      </ul>
+    </div>
+    <div class="method">
+      <div class="panel">
+        <p class="tag">Volet qualitatif</p>
+        <h3>Lire les signes</h3>
+        <p style="margin-top:8px">Corpus : publicités, articles de presse et règlements de police, analysés par l'analyse de discours et l'analyse sémiotique de l'image.</p>
+      </div>
+      <div class="panel">
+        <p class="tag">Volet quantitatif</p>
+        <h3>Suivre les chiens en refuge</h3>
+        <p style="margin-top:8px">Données demandées aux refuges : entrées par race, motif, durée de séjour, issue (adoption, transfert, euthanasie).</p>
+        <div class="compare">
+          <div class="box">Refuges en zone à liste de races<br><span class="src">Ath, La Louvière, Mariemont…</span></div>
+          <span class="vs">vs</span>
+          <div class="box">Refuges en zone sans liste<br><span class="src">Mons, Charleroi, Botte du Hainaut…</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="fiche">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="tag">06 · La fiche de proposition</p>
+      <h2>Ce que contiendra ma fiche</h2>
+      <p class="read">La fiche sera déposée sur MEL au plus tard le 18 décembre. Voici ce que chaque rubrique contiendra.</p>
+    </div>
+
+    <details open>
+      <summary><span class="num">1</span><span class="title">Raisons personnelles et scientifiques</span></summary>
+      <div class="body">
+        « Après avoir moi-même travaillé en refuge auprès de chiens et de chats trouvés, abandonnés ou saisis, j'ai pu me rendre compte qu'il existe une corrélation entre ce que montrent les médias, les grosses entreprises, la pub,… et ce que pensent les personnes qui envisagent une adoption. »
+      </div>
+    </details>
+    <details>
+      <summary><span class="num">2</span><span class="title">Enseignements de référence</span></summary>
+      <div class="body"><p>Ce sujet couvre plusieurs enseignements, le cours de sémiotique donné en BA1 pose de fortes bases à ma recherche, ainsi que les cours de critique des sources, d'enjeux numériques de la communication, de déontologie de l'information et de la communication et de communication marketing.</p></div>
+    </details>
+    <details>
+      <summary><span class="num">3</span><span class="title">Projet, cadre théorique et pertinence</span></summary>
+      <div class="body">
+        <p>Cadre actuel : agenda-setting, cadrage, stigmatisation, sémiotique.</p>
+      </div>
+    </details>
+    <details>
+      <summary><span class="num">4</span><span class="title">Méthodes</span></summary>
+      <div class="body">
+      « Une analyse de contenu et de discours serait sûrement la méthode la plus juste pour mener une recherche qualitative. Collecter des données auprès de refuges et les comparer entre zones serait le plus efficace pour le volet quantitatif. »
+      </div>
+    </details>
+    <details>
+      <summary><span class="num">5</span><span class="title">Accès aux données et au terrain</span></summary>
+      <div class="body">« Ayant été présente en refuge, j'ai la chance d'avoir déjà des contacts avec des ASBL en Belgique ; je connais également plusieurs vétérinaires et/ou comportementalistes canins toujours en activité. »</div>
+    </details>
+    <details>
+      <summary><span class="num">6</span><span class="title">Questions éthiques</span></summary>
+      <div class="body">« Ayant moi-même travaillé en refuge et étant partie d'une hypothèse assez marquée sur le rôle des médias, je ne suis pas dans une posture de neutralité totale. »<p>Également : consentement des personnes interrogées, RGPD, risque de renforcer les stéréotypes étudiés.</p></div>
+    </details>
+    <details>
+      <summary><span class="num">7</span><span class="title">Bibliographie de départ</span></summary>
+      <div class="body">
+        <p>Plus de 30 références lues et fichées. Les sept qui portent l'argument sont listées en bas de page.</p>
+      </div>
+    </details>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <div class="cta">
+      <p class="tag">07 · Pourquoi vous</p>
+      <h2><span>Accepteriez-vous de diriger ce mémoire, ou d'en discuter lors d'un rendez-vous ?</span></h2>
+      <p><span>Je pense que vous êtes la personne la plus qualifiée pour m'accompagner, du fait de vos connaissances en sémiotique et du cadre de ma recherche.</span></p>
+      <div class="row">
+        <span class="mail" id="mail">emma.de.volder@ulb.be</span>
+        <button type="button" id="copy">Copier l'adresse</button>
+        <span id="copied" aria-live="polite"></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p class="tag">Références principales</p>
+    <ol>
+      <li>Duffy, D. L., Hsu, Y. et Serpell, J. A. (2008). Breed differences in canine aggression. <i>Applied Animal Behaviour Science</i>, 114(3-4).</li>
+      <li>Hammond, A., Rowland, T., Mills, D. S. et Pilot, M. (2022). Comparison of behavioural tendencies between « dangerous dogs » and other domestic dog breeds. <i>Evolutionary Applications</i>, 15(11).</li>
+      <li>Mouton, M., Boulton, A., Solomon, O. et Rock, M. J. (2019). « When the dog bites ». <i>Health &amp; Place</i>, 57.</li>
+      <li>Montrose, V. T. et al. (2020). Dog bites dog: the use of news media articles to investigate dog-on-dog aggression. <i>Journal of Veterinary Behavior</i>, 40.</li>
+      <li>Ghirlanda, S., Acerbi, A. et Herzog, H. (2014). Dog movie stars and dog breed popularity. <i>PLoS ONE</i>, 9(9).</li>
+      <li>Parkinson, C. (2023). Defining dangerous dogs: breed, class, and masculinity. <i>Anthropos</i>, 55.</li>
+      <li>De Keuster, T., Lamoureux, J. et Kahn, A. (2006). Epidemiology of dog bites: a Belgian experience. <i>The Veterinary Journal</i>, 172(3).</li>
+    </ol>
+  </div>
+</footer>
+
+<script>
+(function () {
+  // 01 Test
+  var dogs = document.querySelectorAll('.dog');
+  var names = { a: 'le Malinois', b: 'le Pit Bull', c: 'le Labrador', d: 'le Chihuahua' };
+  dogs.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      dogs.forEach(function (b) { b.setAttribute('aria-pressed', 'false'); });
+      btn.setAttribute('aria-pressed', 'true');
+      document.getElementById('reveal').classList.add('on');
+      document.getElementById('chosen-note').textContent = 'Vous avez choisi ' + names[btn.dataset.dog] + '. Comparez maintenant ce que disent la loi et la science.';
+    });
+  });
+
+  // 03 Peirce
+  var tabs = document.querySelectorAll('[role="tab"]');
+  tabs.forEach(function (t) {
+    t.addEventListener('click', function () {
+      tabs.forEach(function (o) {
+        var on = o === t;
+        o.setAttribute('aria-selected', on ? 'true' : 'false');
+        document.getElementById(o.getAttribute('aria-controls')).hidden = !on;
+      });
+    });
+  });
+
+  // 03 Boucle
+  var steps = [
+    { theory: 'Agenda-setting (McCombs et Shaw) et cadrage (Entman) : les médias rendent certaines races saillantes et cadrent la morsure comme un désordre.', proof: 'Tous les articles du corpus de Mouton et al. (2019) citent la race ; une race stigmatisée a plus de chances de faire un article (Montrose et al. 2020).' },
+    { theory: 'Symbole au sens de Peirce et mythe au sens de Barthes : la race prend une connotation de danger, de classe et de virilité.', proof: 'Parkinson (2023) relie le Pitbull à la masculinité « déviante » dans la presse britannique ; Kogan et al. (2022) : le Pitbull est la seule race jugée à haut risque par plus de la moitié des répondants.' },
+    { theory: 'Étiquetage (Becker) et stigmate (Goffman) : une autorité fige la catégorie et la rend opposable.', proof: 'Hainaut : 21 textes sur 29 nomment des races, 27 sur 29 sans justification, une liste de 1998 annulée mais toujours recopiée.' },
+    { theory: 'Indice au sens de Peirce : la muselière imposée par la loi signale le danger à chaque passant.', proof: 'Piste à vérifier sur le terrain : la règle produirait le signe qui confirme la réputation.' }
+  ];
+  var nodes = document.querySelectorAll('.node');
+  var detail = document.getElementById('loop-detail');
+  function show(i) {
+    nodes.forEach(function (n) { n.classList.toggle('active', Number(n.dataset.step) === i); });
+    detail.innerHTML = '';
+    var a = document.createElement('div'); a.className = 'panel';
+    a.innerHTML = '<p class="tag">Théorie</p><p style="margin-top:6px"></p>';
+    a.querySelector('p:last-child').textContent = steps[i].theory;
+    var b = document.createElement('div'); b.className = 'panel';
+    b.innerHTML = '<p class="tag">Preuves</p><p style="margin-top:6px"></p>';
+    b.querySelector('p:last-child').textContent = steps[i].proof;
+    detail.appendChild(a); detail.appendChild(b);
+  }
+  nodes.forEach(function (n) {
+    n.addEventListener('click', function () { show(Number(n.dataset.step)); });
+    n.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); show(Number(n.dataset.step)); } });
+  });
+  show(0);
+
+  // 04 Barres
+  var bars = [
+    ['American Staffordshire Terrier', 21, 'hot'], ['Pitbull', 21, 'hot'], ['Rottweiler', 21, 'hot'], ['Tosa Inu', 21, 'hot'], ['Mastiff', 21, 'hot'],
+    ['Akita, Dogue de Bordeaux et 5 autres', 18, ''], ['English Terrier', 16, ''], ['Berger malinois', 6, 'be'], ['Doberman', 6, ''],
+    ['American Bully', 4, ''], ['Groenendael, Laekenois, Bouviers', 2, 'be']
+  ];
+  var bw = document.getElementById('bars');
+  bars.forEach(function (r) {
+    var row = document.createElement('div'); row.className = 'bar ' + r[2];
+    var l = document.createElement('span'); l.textContent = r[0];
+    var t = document.createElement('div'); t.className = 'track';
+    var f = document.createElement('div'); f.className = 'fill'; f.style.width = (r[1] / 21 * 100) + '%';
+    t.appendChild(f);
+    var v = document.createElement('span'); v.className = 'v'; v.textContent = r[1];
+    row.appendChild(l); row.appendChild(t); row.appendChild(v); bw.appendChild(row);
+  });
+
+  // 04 Règlements
+  var regs = [{"n": "Tournai", "c": "Tournai", "k": "race", "r": 14, "z": "commune", "p": "Interdiction totale dans le piétonnier, les parcs et pendant la foire"}, {"n": "Rumes", "c": "Rumes", "k": "race", "r": 13, "z": "commune", "p": "Interdiction dans les parcs"}, {"n": "Brunehaut", "c": "Brunehaut", "k": "race", "r": 14, "z": "commune", "p": "Interdiction lors des festivités"}, {"n": "Antoing", "c": "Antoing", "k": "race", "r": 14, "z": "commune", "p": "Déclaration exigée avant le 1er juillet 2013"}, {"n": "Mouscron", "c": "Mouscron", "k": "race", "r": 13, "z": "commune", "p": "Déclaration à la police locale"}, {"n": "Comines-Warneton", "c": "Comines-Warneton", "k": "race", "r": 13, "z": "commune", "p": "Muselière levée si test de sociabilité réussi"}, {"n": "Leuze-en-Hainaut et Beloeil", "c": "Leuze-en-Hainaut, Beloeil", "k": "categories", "r": 15, "z": "zone", "p": "Au maximum 2 chiens listés par foyer"}, {"n": "Val de l'Escaut", "c": "Celles, Estaimpuis, Mont-de-l'Enclus, Pecq", "k": "categories", "r": 15, "z": "zone", "p": "Amendes de 25 à 350 €"}, {"n": "Ath", "c": "Ath", "k": "maximaliste", "r": 22, "z": "commune", "p": "Liste la plus longue : 22 races, bergers et bouviers belges inclus"}, {"n": "Des Collines", "c": "Ellezelles, Flobecq, Frasnes-lez-Anvaing, Lessines", "k": "comportement", "r": 0, "z": "zone", "p": "Vise les animaux « réputés malfaisants ou féroces »"}, {"n": "Mons", "c": "Mons", "k": "comportement", "r": 0, "z": "commune", "p": "« La race, la taille, le poids importent peu »"}, {"n": "Quévy", "c": "Quévy", "k": "comportement", "r": 0, "z": "commune", "p": "Définition par le comportement"}, {"n": "La Louvière", "c": "La Louvière", "k": "maximaliste", "r": 19, "z": "commune", "p": "19 races, dont bergers et bouviers belges"}, {"n": "Sylle-et-Dendre", "c": "Brugelette, Chièvres, Enghien, Jurbise, Lens, Silly", "k": "comportement", "r": 0, "z": "zone", "p": "Chiens agressifs ou dressés au mordant"}, {"n": "Boraine", "c": "Boussu, Colfontaine, Frameries, Quaregnon, Saint-Ghislain", "k": "race", "r": 14, "z": "zone", "p": "Seule mention d'une lignée : « Red Nose »"}, {"n": "Haute Senne", "c": "Braine-le-Comte, Écaussinnes, Le Rœulx, Soignies", "k": "race", "r": 14, "z": "zone", "p": "Justification écrite : « gravité des morsures »"}, {"n": "Hauts-Pays", "c": "Dour, Hensies, Honnelles, Quiévrain", "k": "race", "r": 13, "z": "zone", "p": "Brevet de sociabilité obligatoire"}, {"n": "Charleroi", "c": "Charleroi", "k": "comportement", "r": 0, "z": "commune", "p": "Liste de races abrogée en 2022"}, {"n": "Châtelet / Aiseau-Presles / Farciennes", "c": "Châtelet, Aiseau-Presles, Farciennes", "k": "comportement", "r": 0, "z": "zone", "p": "Définition par le comportement"}, {"n": "Binche-Anderlues-Lermes", "c": "Anderlues, Binche, Lobbes, Erquelinnes, Merbes-le-Château, Estinnes", "k": "race", "r": 13, "z": "zone", "p": "Justification écrite : « gravité des morsures »"}, {"n": "Botte du Hainaut", "c": "Beaumont, Chimay, Froidchapelle, Momignies, Sivry-Rance", "k": "comportement", "r": 0, "z": "zone", "p": "« La race importe peu », comme à Mons"}, {"n": "Mariemont", "c": "Chapelle-lez-Herlaimont, Manage, Morlanwelz, Seneffe", "k": "race", "r": 13, "z": "zone", "p": "Autorisation annuelle du bourgmestre, reproduction interdite"}, {"n": "Fontaine-l'Évêque", "c": "Fontaine-l'Évêque", "k": "categories", "r": 15, "z": "commune", "p": "Texte identique à Courcelles"}, {"n": "Courcelles", "c": "Courcelles", "k": "categories", "r": 15, "z": "commune", "p": "Texte identique à Fontaine-l'Évêque"}, {"n": "Fleurus", "c": "Fleurus", "k": "interdiction", "r": 5, "z": "commune", "p": "Détention interdite sauf certificat de socialisation"}, {"n": "Pont-à-Celles", "c": "Pont-à-Celles", "k": "interdiction", "r": 5, "z": "commune", "p": "Texte identique à Fleurus"}, {"n": "Les Bons Villers", "c": "Les Bons Villers", "k": "interdiction", "r": 5, "z": "commune", "p": "Texte identique à Fleurus"}, {"n": "Germinalt", "c": "Gerpinnes, Ham-sur-Heure-Nalinnes, Montigny-le-Tilleul, Thuin", "k": "comportement", "r": 0, "z": "zone", "p": "Déclaration de tout chien de 15 kg ou plus"}, {"n": "Bernissart et Péruwelz", "c": "Bernissart, Péruwelz", "k": "race", "r": 13, "z": "zone", "p": "Texte identique à Antoing"}];
+  var labels = { race: 'liste de races', categories: 'catégories de races', maximaliste: 'liste étendue', interdiction: 'quasi-interdiction', comportement: 'comportement seul' };
+  var group = { race: 'liste', categories: 'liste', maximaliste: 'liste', interdiction: 'interdiction', comportement: 'comportement' };
+  var list = document.getElementById('regs');
+  var count = document.getElementById('count');
+  function render(f) {
+    list.innerHTML = '';
+    var shown = regs.filter(function (r) { return f === 'all' || group[r.k] === f; });
+    var nc = shown.reduce(function (s, r) { return s + r.c.split(', ').length; }, 0);
+    count.textContent = shown.length + ' textes · ' + nc + ' communes';
+    shown.forEach(function (r) {
+      var d = document.createElement('div'); d.className = 'reg'; d.dataset.k = r.k;
+      var s = document.createElement('strong'); s.textContent = r.n;
+      var k = document.createElement('span'); k.className = 'k'; k.textContent = labels[r.k] + (r.r ? ' · ' + r.r + ' races' : '');
+      var c = document.createElement('span'); c.className = 'c'; c.textContent = (r.z === 'zone' ? 'Zone de police : ' : 'Commune : ') + r.c;
+      var p = document.createElement('span'); p.className = 'p'; p.textContent = r.p;
+      d.appendChild(s); d.appendChild(k); d.appendChild(c); d.appendChild(p); list.appendChild(d);
+    });
+  }
+  var fbtns = document.querySelectorAll('.filters button');
+  fbtns.forEach(function (b) {
+    b.addEventListener('click', function () {
+      fbtns.forEach(function (o) { o.setAttribute('aria-pressed', o === b ? 'true' : 'false'); });
+      render(b.dataset.f);
+    });
+  });
+  render('all');
+
+  // 07 Copier
+  document.getElementById('copy').addEventListener('click', function () {
+    var out = document.getElementById('copied');
+    var txt = document.getElementById('mail').textContent;
+    try {
+      navigator.clipboard.writeText(txt).then(function () { out.textContent = 'Adresse copiée.'; }, function () { out.textContent = 'Copie impossible : sélectionnez l’adresse.'; });
+    } catch (e) { out.textContent = 'Copie impossible : sélectionnez l’adresse.'; }
+  });
+})();
+</script>
+</body>
+</html>
