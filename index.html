@@ -77,7 +77,7 @@ section { padding: 64px 0; }
 .src { display: inline-block; font: 400 12px/1.4 var(--font-body); color: var(--muted); background: color-mix(in srgb, var(--pale) 55%, transparent); border-radius: 999px; padding: 2px 9px; margin-top: 4px; }
 
 /* 01 Test : bande verte */
-#test .band { background: var(--green); border-radius: 32px; padding: 34px 28px 30px; }
+#test .band { background: var(--pale); border-radius: 32px; padding: 34px 28px 30px; }
 #test .band .tag { color: var(--ink); }
 #test .band h2 { color: var(--ink); }
 #test .band .read { color: var(--ink); font-weight: 400; }
@@ -203,6 +203,7 @@ details .body { padding: 0 18px 18px 68px; font-size: 15px; display: grid; gap: 
 footer { padding: 24px 0 64px; font-size: 14px; color: var(--muted); }
 footer ol { padding-left: 20px; margin-top: 10px; }
 footer li + li { margin-top: 6px; }
+mark { background: var(--pale); color: var(--ink); padding: 0 3px; border-radius: 3px; }
 </style>
 </head>
 <body>
@@ -236,7 +237,7 @@ footer li + li { margin-top: 6px; }
     <div class="sec-head">
       <p class="tag">01 · Avant de lire</p>
       <h2>Lequel de ces chiens vous semble le plus dangereux ?</h2>
-      <p class="read">Cliquez sur un chien. Votre choix reste visible, puis la loi et la science répondent.</p>
+      <p class="read"<em>Cliquez sur un chien.</em></p>
     </div>
     <div class="dogs" role="group" aria-label="Choisir un chien">
       <button class="dog" type="button" data-dog="a" aria-pressed="false">
@@ -338,15 +339,17 @@ footer li + li { margin-top: 6px; }
           </div>
           <div class="tabpanel" role="tabpanel" id="p-icone" aria-labelledby="t-icone">
             <ul>
-              <li>Un chien de type Staffordshire ou pitbull : tête large, joues marquées, cou épais, pelage court bleu-fauve et poitrail blanc.</li> 
-              <li>Un regard calme, des oreilles naturelles et détendues, la langue visible parce qu’il halète, un fond vert uni et neutre. Rien dans sa posture n’exprime l’agressivité.</li>
-              <li>Ici, on « reconnaît » la race uniquement à la morphologie. Or Nardulli (2018) montre que cette identification visuelle est peu fiable. La race est déjà une lecture, pas un fait.</li>
+               Un chien du type Staffordshire ou pitbull a une tête large, des joues bien dessinées, un cou épais. Son pelage est court, bleu-fauve, avec un poitrail blanc.
+              <br>Il a un regard calme. Ses oreilles sont naturelles et détendues. On voit sa langue parce qu’il halète. Le fond est vert, uni et neutre. Sa posture ne montre aucun signe d’agressivité.
+              <br>on reconnaît la race seulement à partir de la morphologie. Pourtant, Nardulli (2018) montre que cette façon de reconnaître visuellement n'est pas fiable. 
+              <br><mark>La race est déjà une interprétation, pas un fait.</mark>
             </ul>
           </div>
           <div class="tabpanel" role="tabpanel" id="p-indice" aria-labelledby="t-indice" hidden>
             <ul>
-              <li>La muselière est centrale : elle renvoie à une règle qui s’applique à ce chien, ou laisse supposer qu’il a déjà mordu ou pourrait mordre.</li>
-              <li>La muselière ne dit pas ce que le chien a fait, elle dit seulement qu’on le traite comme dangereux. Le passant ne voit pas la différence.</li>
+              La muselière est au centre. Elle fait penser à une règle qui s’applique à ce chien, ou laisse croire qu’il a déjà mordu ou qu’il pourrait mordre.
+              <br>La muselière ne montre pas ce que le chien a fait. Elle montre seulement qu’on le considère comme dangereux. 
+              <br><mark>Un passant ne voit pas la différence.</mark>
             </ul>
           </div>
           <div class="tabpanel" role="tabpanel" id="p-symbole" aria-labelledby="t-symbole" hidden>
@@ -471,13 +474,18 @@ footer li + li { margin-top: 6px; }
     <div class="sec-head">
       <p class="tag">06 · La fiche de proposition</p>
       <h2>Ce que contiendra ma fiche</h2>
-      <p class="read">Voici un début de ce contiendrait ma fiche de proposition.</p>
+      <p class="read">Voici ce que contiendrait ma fiche de proposition.</p>
     </div>
 
     <details open>
       <summary><span class="num">1</span><span class="title">Raisons personnelles et scientifiques</span></summary>
       <div class="body">
-        Après avoir moi-même travaillé en refuge auprès de chiens et de chats trouvés, abandonnés ou saisis, j'ai pu me rendre compte qu'il existe une corrélation entre ce que montrent les médias, les grosses entreprises, la pub,… et ce que pensent les personnes qui envisagent une adoption.
+        Après avoir oeuvré moi‑même dans un refuge pour chiens et chats abandonnés ou saisis, j’ai constaté qu’il existe une corrélation entre ce que montrent les médias, les grandes entreprises, la publicité, et ce que pensent les personnes qui envisagent une adoption. 
+        Ce lien est probablement explicable : de nombreuses études démontrent l’impact de la publicité sur nos idéaux. 
+        Barthes, Saussure et Pierce expliquent comment des signes assimilés conduisent à accepter des faits qui n’avaient pas forcément de lien à l’origine. 
+        Pourtant, personne n’a mené de recherche précise sur ce sujet en Belgique, bien que des études similaires aient été réalisées dans d’autres pays. 
+        Rien n’est si précis, très peu de francophones, et surtout rien de belge. 
+        C’est pourquoi je pense que cette recherche sur l’impact de la publicité est scientifiquement pertinente.
       </div>
     </details>
     <details>
@@ -487,27 +495,49 @@ footer li + li { margin-top: 6px; }
     <details>
       <summary><span class="num">3</span><span class="title">Projet, cadre théorique et pertinence</span></summary>
       <div class="body">
-        <p>Cadre actuel : agenda-setting, cadrage, stigmatisation, sémiotique.</p>
+        <p>
+          Je pars d’une impression simple : certaines races arrivent en refuge en plus grand nombre et y restent plus longtemps. Certaines études montrent cet effet à une certaine échelle, comme celle de Nardulli (2018), qui indique que les Pit Bulls restent trois fois plus longtemps en refuge que leurs congénères. Cet effet peut venir d’un effet de mode : il a été démontré qu’un film peut faire grimper les inscriptions d’une race pendant plusieurs années (Ghirlanda et al. 2013, 2014 ; Herzog 2006). Mais il peut aussi venir de l’étiquette donnée à un chien, donc de la perception de sa race.
+          <br>Ce que l’on sait aujourd’hui, c’est que la race n’est pas un bon prédicteur du comportement. Les variations comportementales sont bien plus observables au sein d’une race qu’entre les races ; bien que certains comportements soient plus typiques de certaines races, il ne s’agit pas de différences nettes (Hammond et al. 2022). Montrose et al. (2020) montrent qu’une race stigmatisée a plus de chances d’apparaître dans les journaux à la suite d’une attaque ; on parle alors de généralisation et de catastrophisme (Arluke et al. 2018).
+          <br>Ce que l’on ignore en revanche, c’est l’impact général. En Belgique, très peu d’étude ont été faites, et elle porte sur les morsures, pas sur les médias ! Et les études existantes ailleurs décrivent les articles, mais cherchent peu à comprendre comment le sens se construit : un apport qui me paraît pourtant très pertinent. Enfin, personne n’a approfondi le passage de ces signes, des médias vers notre vision de ces races, ni l’influence que cela a sur leur parcours en refuge.
+          <br>Ma question est alors la suivante : « Comment les médias et la communication marketing, par les significations qu’ils attribuent aux races canines, orientent-ils le parcours des chiens selon leur race en Belgique ? » Je suppute que certaines races sont systématiquement associées au danger, par la présence de symboles reconnus par la majorité, comme des muselières ou des chaînes, alors que d’autres races seraient immanquablement valorisées. J’avance également l’hypothèse que les races listées dans la loi, et stigmatisées dans les médias, seraient plus souvent « bloquées » en refuge pour une plus longue période, ou plus régulièrement euthanasiées faute d’adoptants. Ces impacts seraient aussi visibles dans la loi et par la loi, créée sous l’effet de l’opinion publique et perpétuant cette même opinion en la confirmant légalement.
+          <br>Sur le plan théorique, plusieurs théoriciens avancent des idées pertinentes. Tout d’abord, sur la construction du sens, Peirce et Barthes. Le premier, avec sa théorie générale des signes, permet de voir un signe comme une triade : representamen, objet et interprétant ; le second décrit la création du mythe par la dénotation et la connotation. Ensuite, la circulation de ces signes s’expliquerait par la théorie de l’agenda-setting de McCombs et Shaw et par la théorie du cadrage d’Entman. Enfin, ces idées finissent par se figer, ce qui s’explique par la théorie du stigmate de Goffman et par celle de l’étiquetage de Becker.
+          <br>Sur le plan de la pertinence, je pense mon projet utile pour combler le manque de recherche belge sur ce sujet, mais aussi parce qu’il permet d’appliquer la sémiotique aux relations entre humains et animaux. Socialement, sa pertinence tient au fait qu’il touche aux refuges saturés, aux euthanasies et à ce qui influe sur les choix d’adoption. Enfin, la pertinence communicationnelle se montre dans les effets concrets des mots et des images choisis par nos médias. Nardulli ouvre cette voie avec sa recherche sur le cadrage positif comme moyen de renverser une image.
+</p>
       </div>
     </details>
     <details>
       <summary><span class="num">4</span><span class="title">Méthodes</span></summary>
       <div class="body">
-      Une analyse de contenu et de discours serait sûrement la méthode la plus juste pour mener une recherche qualitative. Collecter des données auprès de refuges et les comparer entre zones serait le plus efficace pour le volet quantitatif.
-      </div>
+        Je pense avancer dans ce mémoire en usant d’une méthode mixte en deux volets complémentaires : d’un côté, le volet qualitatif, pour comprendre comment se construisent les significations ; de l’autre, le volet quantitatif, pour vérifier les traces que laisseraient ces significations dans notre société.
+        <br>Pour le volet qualitatif, je partirais sur une analyse sémiotique et de discours. Pour ce faire, je constituerais un corpus en trois parties : publicitaire, médiatique et juridique. L’analyse de discours se faisant généralement sur peu de textes, il me faudra établir un échantillonnage raisonné sur une période délimitée. Des critères portant sur les médias choisis, les races visées et les mots-clés utilisés seront aussi définis pour assurer l’objectivité. Pour l’analyse des images et des textes, les théories de Barthes et de Peirce seront les plus utilisées ; encadrées par une grille identique pour tous les documents, elles permettront de reconnaître des récurrences. Des outils comme une grille d’analyse ou un logiciel de lexicométrie, pour repérer les concordances régulières, seront utilisés à cet effet.
+        <br>Pour le volet quantitatif, ce sont des données chiffrées qu’il me faudra aller chercher. Il faudra demander aux refuges les entrées par race, les motifs d’entrée, la durée du séjour et son issue, sur une même période. Comparer les zones de police ayant mis en place des listes de races et celles n’en ayant pas démontrera les conventions que les lois renforcent ou influencent. Pour que ces données soient neutres, il faudra cependant tenir compte de la manière dont la race est déterminée : en effet, Nardulli a établi que la reconnaissance visuelle d’une race est peu fiable ; nous ne sommes pas bons en physionomie canine. De ce fait, il est important de prendre en compte la façon dont un chien est étiqueté. Faire le lien entre ces chiffres et les données qualitatives permettra de poser un lien défini.
+        <br>Enfin, j’aimerais mener des entretiens semi-directifs auprès de responsables de refuge, de comportementalistes et, éventuellement, d’agents communaux. Le but serait de leur demander une interprétation des chiffres, et de voir s’il y a une corrélation entre leur discours, les demandes des adoptants et les signes trouvés dans les médias.
+        <br>Bien que cela puisse sembler beaucoup, je pense ces méthodes réalisables dans l’année qui se présente.      </div>
     </details>
     <details>
       <summary><span class="num">5</span><span class="title">Accès aux données et au terrain</span></summary>
-      <div class="body">Ayant été présente en refuge, j'ai la chance d'avoir déjà des contacts avec des ASBL en Belgique ; je connais également plusieurs vétérinaires et/ou comportementalistes canins toujours en activité.</div>
+      <div class="body">
+        Dans le cadre de la construction de mon corpus, les trois catégories se remplissent différemment. 
+        <br>Le corpus juridique est accessible en ligne, comme je le démontre déjà avec la constitution du corpus juridique du Hainaut. Les recherches de règlements ont été faites de mon côté, mais une partie de l’analyse de ces textes a été réalisée avec l’aide de Claude.ai, afin de fluidifier l’avancée de ce projet. 
+        <br>Pour le corpus médiatique, les médias d’information belges devraient être accessibles grâce à une base de presse, telle qu’Europresse, qui permet de rechercher des articles par mots-clés et par période. 
+        <br>Enfin, pour le corpus publicitaire, de nombreux sites d’archives publicitaires existent ; il me faudra cependant m’assurer que les publicités repérées ont été diffusées en Belgique. 
+        <br>Les données de refuges, mes contacts existants me seront fort utiles afin d’obtenir ces chiffres, certainement en commençant par le Hainaut, en m’appuyant sur le corpus juridique déjà constitué comme premier cas. Pour les entretiens, de la même manière, mes contacts devraient m’aider à trouver des personnes qualifiées.      </div>
+      </div>
     </details>
     <details>
       <summary><span class="num">6</span><span class="title">Questions éthiques</span></summary>
-      <div class="body">De par mon ancien rôle en refuge et étant partie d'une hypothèse assez marquée sur le rôle des médias, je ne suis pas dans une posture de neutralité totale.<p>Également : consentement des personnes interrogées, RGPD, risque de renforcer les stéréotypes étudiés.</p></div>
+      <div class="body">
+        Les entretiens nécessitent un consentement éclairé : chaque personne interrogée doit savoir à quoi serviront ses propos, si elle sera citée nommément ou anonymisée, et pouvoir se retirer à tout moment. 
+        <br>Les données collectées devront être traitées dans le respect du RGPD. Ayant moi-même travaillé en refuge, je ne suis pas dans une posture de neutralité totale : il me faudra veiller à ne pas orienter mes questions dans le sens de ce que je pense déjà. 
+        <br>En documentant la manière dont certaines races sont stigmatisées, je prends le risque de renforcer malgré moi les représentations que je cherche à déconstruire. 
+        <br>Certains sujets (euthanasie, abandons, maltraitance) devront être abordés avec tact. 
+        <br>Enfin, si mon échantillon n’est pas représentatif, il serait malhonnête de présenter mes conclusions comme généralisables.
+      </div>
     </details>
     <details>
       <summary><span class="num">7</span><span class="title">Bibliographie de départ</span></summary>
       <div class="body">
-        <p>Plus de 30 références lues et fichées. Les sept qui portent l'argument sont listées en bas de page.</p>
+        <p>Plus de 30 références lues et fichées. Les sept qui portent l'argument présent sont listées en bas de page.</p>
       </div>
     </details>
   </div>
@@ -534,13 +564,24 @@ footer li + li { margin-top: 6px; }
   <div class="wrap">
     <p class="tag">Références principales</p>
     <ol>
-      <li>Duffy, D. L., Hsu, Y. et Serpell, J. A. (2008). Breed differences in canine aggression. <i>Applied Animal Behaviour Science</i>, 114(3-4).</li>
-      <li>Hammond, A., Rowland, T., Mills, D. S. et Pilot, M. (2022). Comparison of behavioural tendencies between « dangerous dogs » and other domestic dog breeds. <i>Evolutionary Applications</i>, 15(11).</li>
-      <li>Mouton, M., Boulton, A., Solomon, O. et Rock, M. J. (2019). « When the dog bites ». <i>Health &amp; Place</i>, 57.</li>
-      <li>Montrose, V. T. et al. (2020). Dog bites dog: the use of news media articles to investigate dog-on-dog aggression. <i>Journal of Veterinary Behavior</i>, 40.</li>
-      <li>Ghirlanda, S., Acerbi, A. et Herzog, H. (2014). Dog movie stars and dog breed popularity. <i>PLoS ONE</i>, 9(9).</li>
-      <li>Parkinson, C. (2023). Defining dangerous dogs: breed, class, and masculinity. <i>Anthropos</i>, 55.</li>
-      <li>De Keuster, T., Lamoureux, J. et Kahn, A. (2006). Epidemiology of dog bites: a Belgian experience. <i>The Veterinary Journal</i>, 172(3).</li>
+      <li>Barthes, R. (1957). <i>Mythologies</i>. Paris : Seuil.</li>
+      <li>Becker, H. S. (1985). <i>Outsiders. Études de sociologie de la déviance</i> (J.-P. Briand et J.-M. Chapoulie, trad.). Paris : Métailié. (Œuvre originale publiée en 1963)</li>
+      <li>De Keuster, T., Lamoureux, J. et Kahn, A. (2006). Epidemiology of dog bites: a Belgian experience. <i>The Veterinary Journal</i>, 172(3), 482-487. <a href="https://doi.org/10.1016/j.tvjl.2005.04.024">Lien</a></li>
+      <li>De Volder, E. (2026). <i>Chiens dits dangereux dans le Hainaut : analyse des règlements de police</i> [document de travail réalisé avec l'aide de l'outil d'IA Claude, Anthropic]. <a href="https://drive.google.com/drive/folders/15tYCO2RQoig0WW1r_Iw4HDb5jikVUcqg?usp=sharing">Lien</a></li>
+      <li>Duffy, D. L., Hsu, Y. et Serpell, J. A. (2008). Breed differences in canine aggression. <i>Applied Animal Behaviour Science</i>, 114(3-4), 441-460. <a href="https://doi.org/10.1016/j.applanim.2008.04.006">Lien</a></li>
+      <li>Entman, R. M. (1993). Framing: toward clarification of a fractured paradigm. <i>Journal of Communication</i>, 43(4), 51-58. <a href="https://doi.org/10.1111/j.1460-2466.1993.tb01304.x">Lien</a></li>
+      <li>Ghirlanda, S., Acerbi, A. et Herzog, H. (2014). Dog movie stars and dog breed popularity. <i>PLoS ONE</i>, 9(9), e106565. <a href="https://doi.org/10.1371/journal.pone.0106565">Lien</a></li>
+      <li>Goffman, E. (1975). <i>Stigmate. Les usages sociaux des handicaps</i> (A. Kihm, trad.). Paris : Minuit. (Œuvre originale publiée en 1963)</li>
+      <li>Hammond, A., Rowland, T., Mills, D. S. et Pilot, M. (2022). Comparison of behavioural tendencies between « dangerous dogs » and other domestic dog breeds. <i>Evolutionary Applications</i>, 15(11), 1806-1819. <a href="https://doi.org/10.1111/eva.13479">Lien</a></li>
+      <li>Kogan, L. R., Packman, W., Erdman, P., Currin-McCulloch, J. et Bussolari, C. (2022). US adults' perceptions of dog breed bans, dog aggression and breed-specific laws. <i>International Journal of Environmental Research and Public Health</i>, 19(16), 10138. <a href="https://doi.org/10.3390/ijerph191610138">Lien</a></li>
+      <li>McCombs, M. E. et Shaw, D. L. (1972). The agenda-setting function of mass media. <i>Public Opinion Quarterly</i>, 36(2), 176-187. <a href="https://doi.org/10.1086/267990">Lien</a></li>
+      <li>Montrose, V. T., Squibb, K., Hazel, S., Kogan, L. R. et Oxley, J. A. (2020). Dog bites dog: the use of news media articles to investigate dog-on-dog aggression. <i>Journal of Veterinary Behavior</i>, 40, 7-15. <a href="https://doi.org/10.1016/j.jveb.2020.08.002">Lien</a></li>
+      <li>Mouton, M., Boulton, A., Solomon, O. et Rock, M. J. (2019). « When the dog bites ». <i>Health &amp; Place</i>, 57, 70-73. <a href="https://doi.org/10.1016/j.healthplace.2019.03.001">Lien</a></li>
+      <li>Nardulli, C. (2018). <i>Pit Bull Perceptions: Marketing for Positive Change</i> [travail de fin d'études, DePaul University]. <a href="https://academics.depaul.edu/honors/curriculum/archives/Documents/2018%20Senior%20Theses/Nardulli,%20Pit%20Bull%20Perceptions%20Marketing%20for%20Positive%20Change.pdf">Lien</a></li>
+      <li>Parkinson, C. (2023). Defining dangerous dogs: breed, class, and masculinity. <i>Anthropos</i>, 55, 177-193. <a href="https://doi.org/10.26493/2630-4082.55.177-193">Lien</a></li>
+      <li>Peirce, C. S. (1978). <i>Écrits sur le signe</i> (G. Deledalle, trad.). Paris : Seuil.</li>
+      <li>Smoos, S. (2005, 20 janvier). Races de chiens considérées comme dangereuses : quels moyens d'action pour la commune ? <i>Union des Villes et Communes de Wallonie</i>. <a href="https://uvcw.be/police-administrative/articles/art-1625">Lien</a></li>
+      <li>Télésambre (2022, 1er juillet). Charleroi : suppression de la liste des chiens dits dangereux. <a href="https://www.telesambre.be/info/charleroi-suppression-de-la-liste-des-chiens-dits-dangereux/50203">Lien</a></li>
     </ol>
   </div>
 </footer>
@@ -555,7 +596,7 @@ footer li + li { margin-top: 6px; }
       dogs.forEach(function (b) { b.setAttribute('aria-pressed', 'false'); });
       btn.setAttribute('aria-pressed', 'true');
       document.getElementById('reveal').classList.add('on');
-      document.getElementById('chosen-note').textContent = 'Vous avez choisi ' + names[btn.dataset.dog] + '. Comparez maintenant ce que disent la loi et la science.';
+      document.getElementById('chosen-note').textContent = 'Vous avez choisi ' + names[btn.dataset.dog] + '. Que disent les sources ?';
     });
   });
 
